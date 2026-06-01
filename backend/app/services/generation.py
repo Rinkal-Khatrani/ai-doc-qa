@@ -1,5 +1,10 @@
+import logging
+import traceback
+
 from openai import AsyncOpenAI
 from app.core.config import settings
+
+logger = logging.getLogger(__name__)
 
 client = AsyncOpenAI(
     api_key=settings.openrouter_api_key,
@@ -59,7 +64,18 @@ async def stream_answer(question: str, chunks: list[dict]):
             return   # success, stop trying
         except Exception as e:
             last_error = e
+            exc_type = type(e).__name__
+            logger.error(
+                "Model %s failed with %s: %s\n%s",
+                model,
+                exc_type,
+                e,
+                traceback.format_exc(),
+            )
             continue
 
     # all models failed
-    raise Exception(f"All models failed. Last error: {last_error}")
+    exc_type = type(last_error).__name__
+    raise Exception(
+        f"All models failed. Last error [{exc_type}]: {last_error}"
+    )
