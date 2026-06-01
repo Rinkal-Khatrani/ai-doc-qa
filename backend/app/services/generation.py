@@ -48,7 +48,7 @@ async def stream_answer(question: str, chunks: list[dict]):
                 max_tokens=1000,
                 temperature=0.1,
                 extra_headers={
-                    "HTTP-Referer": "http://localhost:5173",
+                    "HTTP-Referer": settings.app_url,
                     "X-Title": "Doc Q&A"
                 }
             )

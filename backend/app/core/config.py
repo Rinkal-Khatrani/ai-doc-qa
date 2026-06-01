@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     aws_region: Optional[str] = None
     s3_endpoint_url: Optional[str] = None
     openrouter_api_key: Optional[str] = None
+    app_url: str = "http://localhost:5173"
 
     class Config:
         env_file = ".env"
