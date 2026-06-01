@@ -6,6 +6,10 @@ import RegisterPage from "./pages/RegisterPage";
 
 import ChatPage from "./pages/ChatPage";
 import HomePage from "./pages/HomePage";
+import "./styles/global.css"; // rename index.css → styles/globals.css
+import "./styles/auth.css";
+import "./styles/home.css";
+import "./styles/chat.css";
 
 const qc = new QueryClient();
 
