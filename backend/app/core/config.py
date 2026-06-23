@@ -19,6 +19,8 @@ class Settings(BaseSettings):
     openrouter_api_key: Optional[str] = None
     app_url: str = "http://localhost:5173"
     hf_token: Optional[str] = None
+    debug: bool = False          # set True only locally
+    db_echo: bool = False 
     
     @property
     def async_database_url(self) -> str:

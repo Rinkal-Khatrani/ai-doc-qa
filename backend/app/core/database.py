@@ -22,7 +22,7 @@ if "neon.tech" in settings.database_url:
 # ✅ Fix 2 — NullPool is essential for Neon serverless
 engine = create_async_engine(
     db_url,
-    echo=False,                # set True only for local debugging
+    echo=settings.db_echo,                # set True only for local debugging
     poolclass=NullPool,        # ✅ prevents stale connection reuse
     connect_args=connect_args,
 )

@@ -4,6 +4,15 @@ from contextlib import asynccontextmanager
 
 from app.core.database import init_db
 from app.routers import auth, documents, chat
+import logging
+
+# Set SQLAlchemy to only log errors, not every query
+logging.getLogger("sqlalchemy.engine").setLevel(logging.ERROR)
+logging.getLogger("sqlalchemy.pool").setLevel(logging.ERROR)
+logging.getLogger("sqlalchemy.dialects").setLevel(logging.ERROR)
+
+# Keep your app logs at INFO
+logging.basicConfig(level=logging.INFO)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
