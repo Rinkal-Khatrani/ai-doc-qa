@@ -19,8 +19,18 @@ class Settings(BaseSettings):
     openrouter_api_key: Optional[str] = None
     app_url: str = "http://localhost:5173"
     hf_token: Optional[str] = None
+    
+    @property
+    def async_database_url(self) -> str:
+        """Always return asyncpg-compatible URL for Neon"""
+        return self.database_url.replace(
+            "postgresql://", "postgresql+asyncpg://"
+        ).replace(
+            "postgres://", "postgresql+asyncpg://"  # ✅ Neon sometimes gives postgres://
+        )
 
     class Config:
         env_file = ".env"
+        env_file_encoding = "utf-8"
 
 settings = Settings()
